@@ -1,10 +1,4 @@
-// تعریف نوع Todo
-interface Todo {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
+import { Todo } from "../todo";
 
 export default async function TodoDetail({
   params,

@@ -1,9 +1,4 @@
-interface Todo {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
+import { Todo } from "./todo";
 
 export default async function TodoList() {
   const res = await fetch("https://jsonplaceholder.typicode.com/todos");
