@@ -1,21 +1,40 @@
-import { Todo } from "./todo";
+"use client"; 
 
-export default async function TodoList() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
-
+import { useQuery } from "@tanstack/react-query";
+//Function for Fetch Data from this web
+async function fetchUsers() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/users");
   if (!res.ok) {
-    throw new Error("Failed to fetch todos");
+    throw new Error("Failed to fetch users");
+  }
+  return res.json();
+}
+
+//component for show users
+export default function TodoList() {
+  const {data: users = [],error,isLoading,} = useQuery({
+    queryKey: ["users"],
+    queryFn: fetchUsers,
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
-  const todos: Todo[] = await res.json();
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div>
-      <h1>Todo List</h1>
+      <h1>User List</h1>
       <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            <pre>{JSON.stringify(todo, null, 2)}</pre>
+        {users.map((user) => (
+          <li key={user.id}>
+            <h2>{user.name}</h2>
+            <p>Email: {user.email}</p>
+            <p>Phone: {user.phone}</p>
+            <p>Company: {user.company.name}</p>
           </li>
         ))}
       </ul>

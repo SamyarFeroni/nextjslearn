@@ -1,7 +1,11 @@
-// Todo.ts
 export interface Todo {
-  userId: number;
   id: number;
-  title: string;
-  completed: boolean;
+  name: string;
+  username: string;
+  email: string;
+  address: string;
+  street: string;
+  suite: string;
+  city: string;
+  zipcode: string;
 }
